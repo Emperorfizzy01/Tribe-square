@@ -3,9 +3,9 @@ import { PostService } from './post.service';
 export declare class PostController {
     private service;
     constructor(service: PostService);
-    createPost(token: string, createDto: CreatePostDto): Promise<any>;
-    updatePost(token: string, createDto: CreatePostDto, id: any): Promise<any>;
-    deletePost(token: string, id: number): Promise<any>;
-    fetchPost(token: string): Promise<any>;
+    createPost(createDto: CreatePostDto, req: any): Promise<any>;
+    updatePost(createDto: CreatePostDto, id: any, req: any): Promise<any>;
+    deletePost(id: number, req: any): Promise<any>;
+    fetchPost(req: any): Promise<any>;
     fetchAllPost(): Promise<any>;
 }

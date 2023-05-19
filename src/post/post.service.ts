@@ -17,14 +17,8 @@ export class PostService {
       @InjectRepository(Post) private readonly postModel: Repository<Post>,
     ) {}
 
-    async createPost(token: string, postDto: CreatePostDto): Promise<any> {
+    async createPost(postDto: CreatePostDto, user: User): Promise<any> {
       try {
-        if (!token) throw new NotFoundException(Errormessage.InvalidToken);
-        const { phone } = <JwtPayload>jwt.verify(token, process.env.JWT_SECRET);
-        const user = await this.userModel.findOneBy({
-          phone,
-        });
-  
         if (!user)
           throw new NotFoundException(Errormessage.Userexist);
         const post = await this.postModel.create({
@@ -44,13 +38,8 @@ export class PostService {
       }
     }
   
-    async updatePost(token: string, postDto: CreatePostDto, id: number): Promise<any> {
+    async updatePost(postDto: CreatePostDto, id: number, user: User): Promise<any> {
       try{
-        if (!token) throw new NotFoundException(Errormessage.InvalidToken);
-        const { phone } = <JwtPayload>jwt.verify(token, process.env.JWT_SECRET);
-        const user = await this.userModel.findOneBy({
-          phone,
-        });
   
         if (!user)
           throw new NotFoundException(Errormessage.Userexist);
@@ -78,13 +67,8 @@ export class PostService {
       }
     }
   
-    async deletePost(token: string, id: number): Promise<any> {
+    async deletePost(id: number, user: User): Promise<any> {
       try {
-        if (!token) throw new NotFoundException(Errormessage.InvalidToken);
-        const { phone } = <JwtPayload>jwt.verify(token, process.env.JWT_SECRET);
-        const user = await this.userModel.findOneBy({
-          phone,
-        });
   
         if (!user)
           throw new NotFoundException(Errormessage.Userexist);
@@ -111,20 +95,15 @@ export class PostService {
     }
    
    
-    async fetchPost(token: string): Promise<any> {
+    async fetchPost(user: User): Promise<any> {
       try {
-        if (!token) throw new NotFoundException(Errormessage.InvalidToken);
-        const { phone } = <JwtPayload>jwt.verify(token, process.env.JWT_SECRET);
-        const user = await this.userModel.findOneBy({
-          phone,
-        });
-  
-  
         if (!user)
           throw new NotFoundException(Errormessage.Userexist);
           const post = await this.postModel.find({
             where: {
-              user
+              user: {
+                id: user.id
+              }
             }
           })
           return {

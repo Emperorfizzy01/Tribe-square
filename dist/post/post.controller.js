@@ -16,56 +16,61 @@ exports.PostController = void 0;
 const common_1 = require("@nestjs/common");
 const post_dto_1 = require("./dto/post.dto");
 const post_service_1 = require("./post.service");
+const auth_guard_1 = require("../guards/auth.guard");
 let PostController = class PostController {
     constructor(service) {
         this.service = service;
     }
-    createPost(token, createDto) {
-        return this.service.createPost(token, createDto);
+    createPost(createDto, req) {
+        return this.service.createPost(createDto, req.user);
     }
-    updatePost(token, createDto, id) {
-        return this.service.updatePost(token, createDto, id);
+    updatePost(createDto, id, req) {
+        return this.service.updatePost(createDto, id, req.user);
     }
-    deletePost(token, id) {
-        return this.service.deletePost(token, id);
+    deletePost(id, req) {
+        return this.service.deletePost(id, req.user);
     }
-    fetchPost(token) {
-        return this.service.fetchPost(token);
+    fetchPost(req) {
+        return this.service.fetchPost(req.user);
     }
     fetchAllPost() {
         return this.service.fetchAllPost();
     }
 };
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Post)('/post'),
-    __param(0, (0, common_1.Headers)('token')),
-    __param(1, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, post_dto_1.CreatePostDto]),
+    __metadata("design:paramtypes", [post_dto_1.CreatePostDto, Object]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "createPost", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Put)('/update-post/:id'),
-    __param(0, (0, common_1.Headers)('token')),
-    __param(1, (0, common_1.Body)()),
-    __param(2, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, post_dto_1.CreatePostDto, Object]),
+    __metadata("design:paramtypes", [post_dto_1.CreatePostDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "updatePost", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Delete)('/delete-post/:id'),
-    __param(0, (0, common_1.Headers)('token')),
-    __param(1, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "deletePost", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)('/fetch-post'),
-    __param(0, (0, common_1.Headers)('token')),
+    __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "fetchPost", null);
 __decorate([

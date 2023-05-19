@@ -19,14 +19,8 @@ export class LikeService {
   ) {}
 
 
-  async likePost(token: string, id: number): Promise<any> {
+  async likePost(id: number, user: User): Promise<any> {
     try {
-      if (!token) throw new NotFoundException(Errormessage.InvalidToken);
-      const { phone } = <JwtPayload>jwt.verify(token, process.env.JWT_SECRET);
-      const user = await this.userModel.findOneBy({
-        phone,
-      });
-
       if (!user)
         throw new NotFoundException(Errormessage.Userexist);
       const post = await this.postModel.findOne({
@@ -64,14 +58,8 @@ export class LikeService {
     }
   }
 
-  async unlikePost(token: string, id: number): Promise<any> {
+  async unlikePost(id: number, user: User): Promise<any> {
     try {
-      if (!token) throw new NotFoundException(Errormessage.InvalidToken);
-      const { phone } = <JwtPayload>jwt.verify(token, process.env.JWT_SECRET);
-      const user = await this.userModel.findOneBy({
-        phone,
-      });
-
       if (!user)
         throw new NotFoundException(Errormessage.Userexist);
         const post = await this.postModel.findOne({

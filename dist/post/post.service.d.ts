@@ -7,9 +7,9 @@ export declare class PostService {
     private readonly userModel;
     private readonly postModel;
     constructor(datasource: DataSource, userModel: Repository<User>, postModel: Repository<Post>);
-    createPost(token: string, postDto: CreatePostDto): Promise<any>;
-    updatePost(token: string, postDto: CreatePostDto, id: number): Promise<any>;
-    deletePost(token: string, id: number): Promise<any>;
-    fetchPost(token: string): Promise<any>;
+    createPost(postDto: CreatePostDto, user: User): Promise<any>;
+    updatePost(postDto: CreatePostDto, id: number, user: User): Promise<any>;
+    deletePost(id: number, user: User): Promise<any>;
+    fetchPost(user: User): Promise<any>;
     fetchAllPost(): Promise<any>;
 }

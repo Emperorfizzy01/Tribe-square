@@ -4,8 +4,11 @@ import {
     Post,
     Get,
     Param,
-    Headers
+    Headers,
+    Request,
+    UseGuards
   } from '@nestjs/common';
+import { AuthGuard } from 'src/guards/auth.guard';
   import { LikeService } from 'src/like/like.service';
 
 @Controller({
@@ -14,14 +17,16 @@ import {
 export class LikeController {
 constructor(private service: LikeService) {}
 
+  @UseGuards(AuthGuard)
   @Post('/like/:id')
-  likePost(@Headers('token') token: string, @Param('id') id: number): Promise<any> {
-    return this.service.likePost(token, id);
+  likePost(@Param('id') id: number, @Request() req): Promise<any> {
+    return this.service.likePost(id, req.user);
   }
 
+  @UseGuards(AuthGuard)
   @Post('/unlike/:id')
-  unlikePost(@Headers('token') token: string, @Param('id') id: number): Promise<any> {
-    return this.service.unlikePost(token, id);
+  unlikePost(@Param('id') id: number, @Request() req): Promise<any> {
+    return this.service.unlikePost(id, req.user);
   }
 
 }

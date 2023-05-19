@@ -11,9 +11,12 @@ import {
     Res,
     Delete,
     Patch,
+    UseGuards,
+    Request,
   } from '@nestjs/common';
   import { CreatePostDto } from './dto/post.dto';
   import { PostService } from './post.service';
+  import { AuthGuard } from 'src/guards/auth.guard';
   
 
 @Controller({
@@ -21,25 +24,30 @@ import {
 })
 export class PostController {
 constructor(private service: PostService) {}
+ 
 
+@UseGuards(AuthGuard)
   @Post('/post')
-  createPost(@Headers('token') token: string, @Body() createDto: CreatePostDto): Promise<any> {
-    return this.service.createPost(token, createDto);
+  createPost(@Body() createDto: CreatePostDto, @Request() req): Promise<any> {
+    return this.service.createPost(createDto, req.user);
   }
 
+  @UseGuards(AuthGuard)
   @Put('/update-post/:id')
-  updatePost(@Headers('token') token: string,  @Body() createDto: CreatePostDto, @Param('id') id,): Promise<any> {
-    return this.service.updatePost(token, createDto, id)
+  updatePost(@Body() createDto: CreatePostDto, @Param('id') id, @Request() req): Promise<any> {
+    return this.service.updatePost(createDto, id, req.user)
   }
 
+  @UseGuards(AuthGuard)
   @Delete('/delete-post/:id')
-  deletePost(@Headers('token') token: string, @Param('id') id: number): Promise<any> {
-    return this.service.deletePost(token, id);
+  deletePost(@Param('id') id: number, @Request() req): Promise<any> {
+    return this.service.deletePost(id, req.user);
   }
 
+  @UseGuards(AuthGuard)
   @Get('/fetch-post')
-  fetchPost(@Headers('token') token: string): Promise<any> {
-    return this.service.fetchPost(token)
+  fetchPost(@Request() req): Promise<any> {
+    return this.service.fetchPost(req.user)
   }
 
   @Get('/fetch-all-post')

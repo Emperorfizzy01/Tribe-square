@@ -8,6 +8,6 @@ export declare class LikeService {
     private readonly likeModel;
     private readonly postModel;
     constructor(datasource: DataSource, userModel: Repository<User>, likeModel: Repository<Like>, postModel: Repository<Post>);
-    likePost(token: string, id: number): Promise<any>;
-    unlikePost(token: string, id: number): Promise<any>;
+    likePost(id: number, user: User): Promise<any>;
+    unlikePost(id: number, user: User): Promise<any>;
 }

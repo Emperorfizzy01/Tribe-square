@@ -14,32 +14,35 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LikeController = void 0;
 const common_1 = require("@nestjs/common");
+const auth_guard_1 = require("../guards/auth.guard");
 const like_service_1 = require("./like.service");
 let LikeController = class LikeController {
     constructor(service) {
         this.service = service;
     }
-    likePost(token, id) {
-        return this.service.likePost(token, id);
+    likePost(id, req) {
+        return this.service.likePost(id, req.user);
     }
-    unlikePost(token, id) {
-        return this.service.unlikePost(token, id);
+    unlikePost(id, req) {
+        return this.service.unlikePost(id, req.user);
     }
 };
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Post)('/like/:id'),
-    __param(0, (0, common_1.Headers)('token')),
-    __param(1, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], LikeController.prototype, "likePost", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Post)('/unlike/:id'),
-    __param(0, (0, common_1.Headers)('token')),
-    __param(1, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], LikeController.prototype, "unlikePost", null);
 LikeController = __decorate([
