@@ -35,7 +35,7 @@ export class PostService {
         })
         const newPost = await this.postModel.save(post);
         return {
-          responseCode: 200,
+          responseCode: 201,
           post: newPost,
           message: 'Post created',
         };
@@ -101,6 +101,7 @@ export class PostService {
        if(post.user.id !== user.id) throw new NotFoundException(Errormessage.UnauthorisedOperation)
         await this.postModel.delete(id);
         return {
+          responseCode: 200,
           success: true,
           message: 'Post successfully deleted',
         };

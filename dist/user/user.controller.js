@@ -53,7 +53,9 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
 UserController = __decorate([
-    (0, common_1.Controller)(''),
+    (0, common_1.Controller)({
+        version: '1'
+    }),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;

@@ -43,7 +43,9 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LikeController.prototype, "unlikePost", null);
 LikeController = __decorate([
-    (0, common_1.Controller)(''),
+    (0, common_1.Controller)({
+        version: '1'
+    }),
     __metadata("design:paramtypes", [like_service_1.LikeService])
 ], LikeController);
 exports.LikeController = LikeController;

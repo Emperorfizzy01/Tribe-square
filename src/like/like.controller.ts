@@ -8,7 +8,9 @@ import {
   } from '@nestjs/common';
   import { LikeService } from 'src/like/like.service';
 
-@Controller('')
+@Controller({
+  version: '1'
+})
 export class LikeController {
 constructor(private service: LikeService) {}
 

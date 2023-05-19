@@ -16,7 +16,9 @@ import {
   import { CreateLoginDto } from 'src/user/dto/login.dto';
   import { UserService } from 'src/user/user.service';
 
-@Controller('')
+@Controller({
+  version: '1'
+})
 export class UserController {
 constructor(private service: UserService) {}
 

@@ -52,20 +52,10 @@ exports.Errormessage = {
         apiErrorCode: '401',
         errorMessage: 'Token has either expired or not provided',
     },
-    AlreadyFollowing: {
-        success: false,
-        apiErrorCode: '403',
-        errorMessage: 'You are already following that user',
-    },
     InvalidOperation: {
         success: false,
         apiErrorCode: '403',
         errorMessage: 'You cant follow yourself',
-    },
-    NotFollowing: {
-        success: false,
-        apiErrorCode: '403',
-        errorMessage: 'You cant unfollow who you are not following',
     },
     AlreadyLiked: {
         success: false,

@@ -16,7 +16,9 @@ import {
   import { PostService } from './post.service';
   
 
-@Controller('')
+@Controller({
+  version: '1'
+})
 export class PostController {
 constructor(private service: PostService) {}
 

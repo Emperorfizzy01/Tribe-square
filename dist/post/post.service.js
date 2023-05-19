@@ -68,7 +68,7 @@ let PostService = class PostService {
             });
             const newPost = await this.postModel.save(post);
             return {
-                responseCode: 200,
+                responseCode: 201,
                 post: newPost,
                 message: 'Post created',
             };
@@ -136,6 +136,7 @@ let PostService = class PostService {
                 throw new common_1.NotFoundException(Errormessage_1.Errormessage.UnauthorisedOperation);
             await this.postModel.delete(id);
             return {
+                responseCode: 200,
                 success: true,
                 message: 'Post successfully deleted',
             };

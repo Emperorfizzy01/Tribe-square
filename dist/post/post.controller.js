@@ -75,7 +75,9 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "fetchAllPost", null);
 PostController = __decorate([
-    (0, common_1.Controller)(''),
+    (0, common_1.Controller)({
+        version: '1'
+    }),
     __metadata("design:paramtypes", [post_service_1.PostService])
 ], PostController);
 exports.PostController = PostController;

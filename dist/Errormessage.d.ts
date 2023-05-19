@@ -49,17 +49,7 @@ export declare const Errormessage: {
         apiErrorCode: string;
         errorMessage: string;
     };
-    AlreadyFollowing: {
-        success: boolean;
-        apiErrorCode: string;
-        errorMessage: string;
-    };
     InvalidOperation: {
-        success: boolean;
-        apiErrorCode: string;
-        errorMessage: string;
-    };
-    NotFollowing: {
         success: boolean;
         apiErrorCode: string;
         errorMessage: string;

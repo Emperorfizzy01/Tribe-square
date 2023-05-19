@@ -93,6 +93,7 @@ export class LikeService {
         const unlikePost = await this.likeModel.delete(alreadyLiked.id)
 
         return {
+          responseCode: 200,
           success: true,
           message: "You unliked the post"
         }

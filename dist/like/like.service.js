@@ -127,6 +127,7 @@ let LikeService = class LikeService {
                 throw new common_1.NotFoundException(Errormessage_1.Errormessage.NotLike);
             const unlikePost = await this.likeModel.delete(alreadyLiked.id);
             return {
+                responseCode: 200,
                 success: true,
                 message: "You unliked the post"
             };
