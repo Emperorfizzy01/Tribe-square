@@ -23,7 +23,7 @@ import {
         // so that we can access it in our route handlers
         request['user'] = payload;
       } catch {
-        throw new UnauthorizedException();
+        throw new NotFoundException(Errormessage.InvalidToken)
       }
       return true;
     }

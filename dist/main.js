@@ -11,7 +11,7 @@ const helmet_1 = __importDefault(require("helmet"));
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('Codemania Assessment')
+        .setTitle('Tribe-Square')
         .setDescription('A simple social media platform')
         .setVersion('2.0')
         .addTag('users')
@@ -19,7 +19,16 @@ async function bootstrap() {
     app.enableVersioning({
         type: common_1.VersioningType.URI,
     });
-    app.use((0, helmet_1.default)());
+    app.use((0, helmet_1.default)({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: [`'self'`],
+                styleSrc: [`'self'`, `'unsafe-inline'`],
+                imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+                scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+            },
+        },
+    }));
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);
     const PORT = process.env.port || 3000;

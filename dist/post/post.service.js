@@ -59,6 +59,7 @@ let PostService = class PostService {
                     user: true
                 }
             });
+            console.log(post);
             if (!post)
                 throw new common_1.NotFoundException(Errormessage_1.Errormessage.Post);
             if (post.user.id !== user.id)

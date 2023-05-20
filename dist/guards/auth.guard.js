@@ -45,7 +45,7 @@ let AuthGuard = class AuthGuard {
             request['user'] = payload;
         }
         catch (_a) {
-            throw new common_1.UnauthorizedException();
+            throw new common_1.NotFoundException(Errormessage_1.Errormessage.InvalidToken);
         }
         return true;
     }

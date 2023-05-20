@@ -52,6 +52,7 @@ export class PostService {
             user: true
           }
        })
+       console.log(post)
        if(!post ) throw new NotFoundException(Errormessage.Post);
        if(post.user.id !== user.id) throw new NotFoundException(Errormessage.UnauthorisedOperation)
        post.text = postDto.text,
